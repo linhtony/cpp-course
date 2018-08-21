@@ -12,7 +12,7 @@ int main(int argc, char **argv) {
     String s1, s2;
 
     try {
-        s1 += s2; // done
+        s1 += s2; // done abc
         s1 += 'a'; // done
         s1[0] = 'b'; // done 
         s1 += "Hello"; // done
