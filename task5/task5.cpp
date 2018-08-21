@@ -12,12 +12,12 @@ int main(int argc, char **argv) {
     String s1, s2;
 
     try {
-        s1 += s2; // done abc
-        s1 += 'a'; // done
-        s1[0] = 'b'; // done 
-        s1 += "Hello"; // done
-        s2 = "Hello" + s1; // done
-        f(s2); // done, don't have to overload "cout <<"
+        s1 += s2; 
+        s1 += 'a'; 
+        s1[0] = 'b'; 
+        s1 += "Hello"; 
+        s2 = "Hello" + s1; 
+        f(s2); // don't have to overload "cout <<"
 
         if (s2 > s1) // == false because 'H' < 'b' (ASCII code)
             cout << s1 << endl;
@@ -40,12 +40,4 @@ int main(int argc, char **argv) {
     getchar();
     getchar();
     return 0;
-    // 1
-    // 2
-    // 3
-
-    // 4
-    // 5 abc
-
-    // new branch? really? ok..
 }
