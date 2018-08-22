@@ -30,7 +30,8 @@ public:
   /* OPERATOR OVERLOADING INTERFACE */
 
   // operator=
-  String& operator=(const String& s); 
+  String& operator=(String s);
+  friend void swap(String& s, String& t);
   // end
 
   // operator +=

@@ -42,9 +42,15 @@ void String::print() const {
 /* IMPLEMENTS OPERATOR OVERLOADING */
 
 // operator=
-String& String::operator=(const String& s) { // from task3
-    init(s.mData);
+String& String::operator=(String s) { // from task3
+    swap(*this, s);
     return *this;
+}
+
+void swap(String& s, String& t)
+{
+    using std::swap;
+    swap(s.mData, t.mData);
 }
 // end
 
@@ -115,7 +121,7 @@ bool operator<=(const String& s, const String& t) {
 
 // negation operator ( operator! )
 bool String::operator!() {
-    return n > 0; // if string not empty, the value is true
+    return n > 0; // if string is not empty, the value is true
 }
 // end
 
