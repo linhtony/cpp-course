@@ -13,10 +13,10 @@ int main(int argc, char **argv) {
 
     try {
         s1 += s2; 
-        s1 += 'a'; 
-        s1[0] = 'b'; 
-        s1 += "Hello"; 
-        s2 = "Hello" + s1; 
+        s1 += 'a'; // s1 prints "a"
+        s1[0] = 'b'; // s1 prints "b"
+        s1 += "Hello"; // s1 prints "bHello"
+        s2 = "Hello" + s1; // s2 prints "HellobHello"
         f(s2); // don't have to overload "cout <<"
 
         if (s2 > s1) // == false because 'H' < 'b' (ASCII code)
@@ -24,8 +24,8 @@ int main(int argc, char **argv) {
         if (s1 <= s2) // == false, see above
             cout << s2 << endl;
 
-        if (!s1)  // if string not empty
-            cin >> s1;
+        if (!s1)  // if string is not empty
+            cin >> s1; // rewrite s1 (?)
     }
 
     catch (buffer_overflow& e)
