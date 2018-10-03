@@ -1,0 +1,1 @@
+Make class String possible to use both with char and wide char symbols..!
