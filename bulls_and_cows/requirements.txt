@@ -1,0 +1,47 @@
+﻿Coding Requirements:
+
+- Use this starting code: main.cpp
+- The first line of the main function must be left at the beginning. If you remove or change it, you will likely lose points for 3 test cases worth 6 points.
+- The code and guess must each be stored in a vector of ints.
+- Follow output formatting as demonstrated in the "Sample Runs".
+- You cannot use string comparisons.
+- You must loop through the code and guess.
+- Even though we only have you do codes of 3, 4 or 5 digits, your program should be easy to modify and scale to 2 - 9 digits.
+
+Sample Runs (This is not complete testing!)
+
+Enter number of digits in code (3, 4 or 5): 0
+Enter code: 2894
+Enter number of digits in code: 4
+Number to guess: 2-8-9-4↵
+Enter Guess: 5555
+Each number must be different.↵
+Enter Guess: 59
+Each number must be different.↵
+Enter Guess: 12345
+You can only enter 4 digits.↵
+Enter Guess: 112233
+You can only enter 4 digits.↵
+Enter Guess: 4698
+1 bulls↵
+2 cows↵
+Enter Guess: 9687
+0 bulls↵
+2 cows↵
+Enter Guess: 2894
+4 bulls... 2-8-9-4 is correct!↵Enter number of digits in code (3, 4 or 5): 0
+Enter code: 29
+Enter number of digits in code: 3
+Number to guess: 0-2-9↵
+Enter Guess: 89
+2 bulls↵
+0 cows↵
+Enter Guess: 29
+3 bulls... 0-2-9 is correct!↵
+Enter number of digits in code (3, 4 or 5): 5
+Number to guess: 4-6-9-7-3↵
+Enter Guess: 49763
+2 bulls↵
+3 cows↵
+Enter Guess: 46973
+5 bulls... 4-6-9-7-3 is correct!↵
