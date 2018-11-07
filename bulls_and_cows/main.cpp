@@ -1,13 +1,13 @@
 #include <iostream>
-#include <ctime>
 #include <vector>
+#include <ctime>
+#include <random>
 
 
 using namespace std;
 
 // number of digits.. must be 0, 3, 4 or 5 (0 is the cheat code)
 int num_of_digits; 
-
 
 // check if the user type the number of digits correctly
 bool checkNumberOfDigits() {
@@ -21,59 +21,46 @@ bool checkNumberOfDigits() {
 }
 
 
-
-
-
-
-// generate a random int with 'n' digit, only be called if num_of_digits not 0
-// @TODO: edit this function
-int randomInt(int digit) {
-    digit = num_of_digits;
-
-    while (true) {
-        srand(time(NULL));
-        int random_number = rand();
-        break;
-    }
-    return 0;
-}
-
-// called when num_of_digits is not 0
-// @TODO: edit this function
-int digitDefault(int digit) {
-
-    switch (digit) {
-
-    case (3):
-        break;
-    case (4):
-        break;
-    case (5):
-        break;
-    }
-
-}
-
-// called when the number of digits is 0
-// @TODO: edit this function
-int digitZero() {
-    int digit = num_of_digits; // 0 only 
-    return 0;
-}
-
 int main() 
 {   
+    vector<int> randomVector; 
+    vector<int> manualVector;
+
     // enter the number of digits and check for correctness
+
     while (true) {
         cout << "Enter number of digits in code: ";
         cin >> num_of_digits;
 
         if (checkNumberOfDigits() == true) {
-        cout << "The number of digits is: " << num_of_digits << endl;
         break; 
         }
     }
 
+
+    // output the code (for testing purpose)
+
+    // TODO: add handler for num_of_digits = 0
+    if (num_of_digits == 0) {
+        cout << "Number to guess: " << endl;
+    } 
+    else {
+        srand(time(NULL));
+        vector<int> rd = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+        random_shuffle(rd.begin(), rd.end());
+
+        for (int i = 0; i < num_of_digits; i++) {
+            randomVector.push_back(rd[i]);
+        }
+
+        cout << "Number to guess: ";
+
+        for (int i = 0; i < num_of_digits; i++) {
+            cout << randomVector[i] << " ";
+        }
+
+        randomVector.resize(num_of_digits);
+    }
 
 
 
