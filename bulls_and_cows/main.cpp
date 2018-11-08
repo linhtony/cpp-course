@@ -33,9 +33,9 @@ int digitsCount(int number) {
 int main() 
 {   
     vector<int> randomVector; 
-    vector<int> manualVector;
+    vector<int> customVector;
 
-    // enter the number of digits and check for correctness
+    /* enter the number of digits and check for correctness */
 
     while (true) {
         cout << "Enter number of digits in code: ";
@@ -46,61 +46,65 @@ int main()
         }
     }
 
+    /* output the code (for testing purpose) */
 
-
-    // output the code (for testing purpose)
-    // TODO: add handler for num_of_digits = 0, when the guessed_num < num of digit (fill the first element with 0)
+    // num_of_digits is 0
+    // TODO: check for duplicates !
     if (num_of_digits == 0) {
-        int manual_code;
-        int manual_code_count;
-        int manual_num_of_digits;
+        int custom_code;
+        int custom_code_count;
+        int custom_num_of_digits;
         
-        cout << "Enter code: ";
-        cin >> manual_code;
-
-        manual_code_count = digitsCount(manual_code);
+        cout << "Enter code (custom code): ";
+        cin >> custom_code;
 
         while (true) {
-            cout << "Enter number of digits in code: ";
-            cin >> manual_num_of_digits;
-            if (manual_num_of_digits == manual_code_count) {
-                int array[manual_num_of_digits];
+            cout << "Enter number of digits in code (custom number of digits): ";
+            cin >> custom_num_of_digits;
+            custom_code_count = digitsCount(custom_code);
 
-                for (int i = manual_num_of_digits - 1; i >= 0; i--) {
-                array[i] = manual_code % 10;
-                manual_code /= 10;
+            if (custom_num_of_digits == custom_code_count) {
+                int array[10];
+
+                for (int i = custom_code_count - 1; i >= 0; i--) {
+                array[i] = custom_code % 10;
+                custom_code /= 10;
                 }
-                for (int i = 0; i <= manual_num_of_digits; i++) {
-                manualVector.push_back( array[i] );
+                for (int i = 0; i <= custom_code_count - 1; i++) {
+                    customVector.push_back( array[i] );
                 }
-                // out the vector
-                for (int i = 0; i <= manual_code_count; i++) {
-                cout << manualVector[i];
-        }
+
+                cout << "Number to guess: ";
+                for (int i = 0; i <= custom_code_count - 1; i++) {
+                    cout << customVector[i] << " ";
+                }
                 break;
             }
-            else if (manual_num_of_digits > manual_code_count) {
-                manualVector.push_back(0);
-                int array[manual_num_of_digits];
-                for (int i = 0; i <= manual_num_of_digits; i++) {
-                manualVector.push_back( array[i] );
+            else if (custom_num_of_digits == custom_code_count + 1) {
+                int array[10];
+                customVector.push_back(0);
+
+                for (int i = custom_code_count - 1; i >= 0; i--) {
+                    array[i] = custom_code % 10;
+                    custom_code /= 10;
                 }
-                // out the vector
-                for (int i = 0; i <= manual_code_count + 1; i++) {
-                cout << manualVector[i];
+                for (int i = 0; i <= custom_code_count; i++) {
+                    customVector.push_back(array[i]);
+                }
+
+                cout << "Number to guess: ";
+                for (int i = 0; i <= custom_code_count; i++) {
+                    cout << customVector[i] << " ";
+                }
                 break;
-                } 
             }
-            else if (manual_num_of_digits < manual_code_count) {
-                cout << "Invalid number of digits in code..! " << endl;
+            else {
+                cout << "Invalid custom number of digits in code..! " << endl;
             }
         }
-
-        cout << manual_code_count;
     }
 
-
-    
+    // num_of_digits is not 0
     else {
         srand(time(NULL));
         vector<int> rd = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
@@ -111,7 +115,6 @@ int main()
         }
 
         cout << "Number to guess: ";
-
         for (int i = 0; i < num_of_digits; i++) {
             cout << randomVector[i] << " ";
         }
