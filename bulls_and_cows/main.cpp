@@ -30,7 +30,7 @@ int digitsCount(int number) {
     return digits; 
 }
 
-void extractToArray(int ar[], int length, int nb) {
+void extractToArray(int ar[], const int length, int nb) {
     for (int i = length - 1; i >= 0; i--) {
         ar[i] = nb % 10;
         nb /= 10;
@@ -38,7 +38,7 @@ void extractToArray(int ar[], int length, int nb) {
 }
 
 // check for duplicates in custom code
-bool duplicateCheck(int num) {
+bool duplicateCheck(const int num) {
     int num_digit_count = digitsCount(num);
 
     int array[10];
@@ -56,8 +56,11 @@ bool duplicateCheck(int num) {
 
 int main() 
 {   
-    vector<int> randomVector; 
-    vector<int> customVector;
+    vector<int> customVector; // num_of_digits = 0
+    vector<int> customVectorGuess; // guess vector (num_of_digits = 0)
+
+    vector<int> randomVector; // num_of_digits not 0
+    vector<int> randomVectorGuess; // guess vector (num_of_digits not 0)
 
     while (true) {
         cout << "Enter number of digits in code: ";
@@ -66,7 +69,7 @@ int main()
         break; 
     }
 
-    // num_of_digits is 0
+    /* num_of_digits is 0 (custom) */
     if (num_of_digits == 0) {
         int custom_code;
         int custom_code_count;
@@ -102,6 +105,7 @@ int main()
                     cout << customVector[i] << " ";
                 }
                 cout << "" << endl;
+                customVector.resize(custom_num_of_digits);
                 break;
             }
             else if (custom_num_of_digits == custom_code_count + 1) {
@@ -120,6 +124,7 @@ int main()
                     cout << customVector[i] << " ";
                 }
                 cout << "" << endl;
+                customVector.resize(custom_num_of_digits);
                 break;
             }
             else {
@@ -128,12 +133,12 @@ int main()
         }
 
         int code_guess;
-
+        
         while (true) {
             cout << "Enter Guess: ";
             cin >> code_guess;
-
             int code_guess_count = digitsCount(code_guess);
+            
             if (code_guess_count > custom_num_of_digits) {
                 if (custom_num_of_digits == 1)
                     cout << "You can only enter " << custom_num_of_digits << " digit" << endl;
@@ -146,9 +151,12 @@ int main()
             else
                 break;
         }
+
+        // TODO: extract guess code to vector and compare it..
+        int code_guess_count = digitsCount(code_guess);
     }
 
-    // num_of_digits is not 0
+    /* num_of_digits is not 0 (random) */
     else {
         srand(time(NULL));
         vector<int> rd = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
@@ -166,13 +174,13 @@ int main()
 
         randomVector.resize(num_of_digits);
 
-        int code_guess;
+        int code_guess;        
 
         while (true) {
             cout << "Enter Guess: ";
             cin >> code_guess;
-
             int code_guess_count = digitsCount(code_guess);
+           
             if (code_guess_count > num_of_digits) {
                 cout << "You can only enter " << num_of_digits << " digits" << endl;
             }
@@ -182,11 +190,19 @@ int main()
             else
                 break;
         }
+
+        // TODO: extract guess code to vector and compare it..
+        int code_guess_count = digitsCount(code_guess);
+
+        if (code_guess_count == num_of_digits) {
+            int array[10];
+            extractToArray(array, num_of_digits, code_guess);
+
+            for (int i = 0; i <= code_guess_count - 1; i++) {
+                randomVectorGuess.push_back(array[i]);
+            }
+        }
     }
-
-
-
-    // TODO: Match guess code with the secret code!
 
 
 
