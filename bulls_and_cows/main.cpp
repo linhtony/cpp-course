@@ -30,6 +30,26 @@ int digitsCount(int number) {
     return digits; 
 }
 
+// check for duplicates in custom code
+bool duplicateCheck(int num) {
+    int number_digit_count = digitsCount(num);
+
+    int array[10];
+    for (int i = number_digit_count - 1; i >= 0; i--) {
+        array[i] = num % 10;
+        num /= 10;
+    }
+
+    for (int i = 0; i < number_digit_count; i++) {
+        for (int j = i + 1; j < number_digit_count; j++) {
+            if (array[i] == array[j])
+                return true;
+        }
+    }
+    return false;
+}
+
+
 int main() 
 {   
     vector<int> randomVector; 
@@ -40,23 +60,27 @@ int main()
     while (true) {
         cout << "Enter number of digits in code: ";
         cin >> num_of_digits;
-
-        if (checkNumberOfDigits() == true) {
+        if ( checkNumberOfDigits() == true ) 
         break; 
-        }
     }
 
     /* output the code (for testing purpose) */
 
     // num_of_digits is 0
-    // TODO: check for duplicates !
     if (num_of_digits == 0) {
         int custom_code;
         int custom_code_count;
         int custom_num_of_digits;
         
-        cout << "Enter code (custom code): ";
-        cin >> custom_code;
+        while (true) {
+            cout << "Enter code (custom code): ";
+            cin >> custom_code;
+            if ( duplicateCheck(custom_code) == true ) {
+                cout << "Custom code contains duplicates! " << endl;
+            }
+            else
+                break;
+        }
 
         while (true) {
             cout << "Enter number of digits in code (custom number of digits): ";
@@ -64,12 +88,13 @@ int main()
             custom_code_count = digitsCount(custom_code);
 
             if (custom_num_of_digits == custom_code_count) {
+                
                 int array[10];
-
                 for (int i = custom_code_count - 1; i >= 0; i--) {
                 array[i] = custom_code % 10;
                 custom_code /= 10;
                 }
+
                 for (int i = 0; i <= custom_code_count - 1; i++) {
                     customVector.push_back( array[i] );
                 }
@@ -81,13 +106,14 @@ int main()
                 break;
             }
             else if (custom_num_of_digits == custom_code_count + 1) {
-                int array[10];
                 customVector.push_back(0);
 
+                int array[10];
                 for (int i = custom_code_count - 1; i >= 0; i--) {
                     array[i] = custom_code % 10;
                     custom_code /= 10;
                 }
+
                 for (int i = 0; i <= custom_code_count; i++) {
                     customVector.push_back(array[i]);
                 }
