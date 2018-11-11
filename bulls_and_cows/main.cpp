@@ -55,16 +55,12 @@ int main()
     vector<int> randomVector; 
     vector<int> customVector;
 
-    /* enter the number of digits and check for correctness */
-
     while (true) {
         cout << "Enter number of digits in code: ";
         cin >> num_of_digits;
         if ( checkNumberOfDigits() == true ) 
         break; 
     }
-
-    /* output the code (for testing purpose) */
 
     // num_of_digits is 0
     if (num_of_digits == 0) {
@@ -99,10 +95,12 @@ int main()
                     customVector.push_back( array[i] );
                 }
 
+                // output the code for testing purpose
                 cout << "Number to guess: ";
                 for (int i = 0; i <= custom_code_count - 1; i++) {
                     cout << customVector[i] << " ";
                 }
+                cout << "" << endl;
                 break;
             }
             else if (custom_num_of_digits == custom_code_count + 1) {
@@ -118,15 +116,37 @@ int main()
                     customVector.push_back(array[i]);
                 }
 
+                // output the code for testing purpose
                 cout << "Number to guess: ";
                 for (int i = 0; i <= custom_code_count; i++) {
                     cout << customVector[i] << " ";
                 }
+                cout << "" << endl;
                 break;
             }
             else {
                 cout << "Invalid custom number of digits in code..! " << endl;
             }
+        }
+
+        int code_guess;
+
+        while (true) {
+            cout << "Enter Guess: ";
+            cin >> code_guess;
+
+            int code_guess_count = digitsCount(code_guess);
+            if (code_guess_count > custom_num_of_digits) {
+                if (custom_num_of_digits == 1)
+                    cout << "You can only enter " << custom_num_of_digits << " digit" << endl;
+                else
+                    cout << "You can only enter " << custom_num_of_digits << " digits" << endl;
+            }
+            else if (duplicateCheck(code_guess) == true || (code_guess_count + 1 < custom_num_of_digits)) {
+                cout << "Each number must be different! " << endl;
+            }
+            else
+                break;
         }
     }
 
@@ -144,13 +164,35 @@ int main()
         for (int i = 0; i < num_of_digits; i++) {
             cout << randomVector[i] << " ";
         }
+        cout << "" << endl;
 
         randomVector.resize(num_of_digits);
+
+        int code_guess;
+
+        while (true) {
+            cout << "Enter Guess: ";
+            cin >> code_guess;
+
+            int code_guess_count = digitsCount(code_guess);
+            if (code_guess_count > num_of_digits) {
+                cout << "You can only enter " << num_of_digits << " digits" << endl;
+            }
+            else if ( (duplicateCheck(code_guess) == true) || (code_guess_count + 1 < num_of_digits) ) {
+                cout << "Each number must be different! " << endl;
+            }
+            else
+                break;
+        }
     }
 
 
 
-    // TODO: keep coding...
+    // TODO: Match guess code with the secret code!
+
+
+
     getchar();
     getchar();
+    return 0;
 }
