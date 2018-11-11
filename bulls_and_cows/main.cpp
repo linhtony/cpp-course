@@ -30,18 +30,22 @@ int digitsCount(int number) {
     return digits; 
 }
 
+void extractToArray(int ar[], int length, int nb) {
+    for (int i = length - 1; i >= 0; i--) {
+        ar[i] = nb % 10;
+        nb /= 10;
+    }
+}
+
 // check for duplicates in custom code
 bool duplicateCheck(int num) {
-    int number_digit_count = digitsCount(num);
+    int num_digit_count = digitsCount(num);
 
     int array[10];
-    for (int i = number_digit_count - 1; i >= 0; i--) {
-        array[i] = num % 10;
-        num /= 10;
-    }
+    extractToArray(array, num_digit_count, num);
 
-    for (int i = 0; i < number_digit_count; i++) {
-        for (int j = i + 1; j < number_digit_count; j++) {
+    for (int i = 0; i < num_digit_count; i++) {
+        for (int j = i + 1; j < num_digit_count; j++) {
             if (array[i] == array[j])
                 return true;
         }
@@ -86,10 +90,7 @@ int main()
             if (custom_num_of_digits == custom_code_count) {
                 
                 int array[10];
-                for (int i = custom_code_count - 1; i >= 0; i--) {
-                array[i] = custom_code % 10;
-                custom_code /= 10;
-                }
+                extractToArray(array, custom_code_count, custom_code);
 
                 for (int i = 0; i <= custom_code_count - 1; i++) {
                     customVector.push_back( array[i] );
@@ -107,10 +108,7 @@ int main()
                 customVector.push_back(0);
 
                 int array[10];
-                for (int i = custom_code_count - 1; i >= 0; i--) {
-                    array[i] = custom_code % 10;
-                    custom_code /= 10;
-                }
+                extractToArray(array, custom_code_count, custom_code);  
 
                 for (int i = 0; i <= custom_code_count; i++) {
                     customVector.push_back(array[i]);
@@ -192,6 +190,7 @@ int main()
 
 
 
+    cout << "\nPress any key to exit... " << endl;
     getchar();
     getchar();
     return 0;
