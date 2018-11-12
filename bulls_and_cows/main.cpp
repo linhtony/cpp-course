@@ -7,7 +7,7 @@
 using namespace std;
 
 // number of digits.. must be 0, 3, 4 or 5 (0 is the cheat code)
-int num_of_digits; 
+int num_of_digits;
 
 // check if the user type the number of digits correctly
 bool checkNumberOfDigits() {
@@ -53,6 +53,31 @@ bool duplicateCheck(const int num) {
     return false;
 }
 
+// return 1 if you win the game..
+int winCondition(vector<int> vt, vector<int> vtGuess, int code_guess, int counter, int nod) {
+    int win = 0;
+    counter = digitsCount(code_guess);
+
+    int array[10];
+    extractToArray(array, nod, code_guess);
+
+    for (int i = 0; i < nod; i++) {
+        vtGuess.push_back(array[i]);
+    }
+
+    // TODO: add Cows
+    int bulls = 0;
+    for (int i = 0; i < nod; i++) {
+        if (vt.at(i) == vtGuess.at(i))
+            bulls++;
+    }
+    cout << bulls << " BULLS " << endl;
+    cout << "NUM OF DIGITS " << nod << endl;
+    if (bulls == nod)
+        win = 1;
+    return win;
+}
+
 
 int main() 
 {   
@@ -84,7 +109,7 @@ int main()
             else
                 break;
         }
-
+        
         while (true) {
             cout << "Enter number of digits in code (custom number of digits): ";
             cin >> custom_num_of_digits;
@@ -105,8 +130,6 @@ int main()
                     cout << customVector[i] << " ";
                 }
                 cout << "" << endl;
-
-                customVector.resize(custom_num_of_digits);
                 break;
             }
             else if (custom_num_of_digits == custom_code_count + 1) {
@@ -125,8 +148,6 @@ int main()
                     cout << customVector[i] << " ";
                 }
                 cout << "" << endl;
-
-                customVector.resize(custom_num_of_digits);
                 break;
             }
             else {
@@ -136,11 +157,12 @@ int main()
 
         int code_guess;
         
+        // user begins to guess!
         while (true) {
             cout << "Enter Guess: ";
             cin >> code_guess;
             int code_guess_count = digitsCount(code_guess);
-            
+
             if (code_guess_count > custom_num_of_digits) {
                 if (custom_num_of_digits == 1)
                     cout << "You can only enter " << custom_num_of_digits << " digit" << endl;
@@ -150,32 +172,10 @@ int main()
             else if (duplicateCheck(code_guess) == true || (code_guess_count + 1 < custom_num_of_digits)) {
                 cout << "Each number must be different! " << endl;
             }
-            else
+            else if (winCondition(customVector, customVectorGuess, code_guess, code_guess_count, custom_num_of_digits) == 1) {
                 break;
-        }
-
-        int code_guess_count = digitsCount(code_guess);
-
-        if (code_guess_count == custom_num_of_digits) {
-            int array[10];
-            extractToArray(array, custom_num_of_digits, code_guess);
-
-            for (int i = 0; i < code_guess_count; i++) {
-                customVectorGuess.push_back(array[i]);
             }
-            
-            customVectorGuess.resize(custom_num_of_digits);
-        }
-        else {
-            int array[10];
-            extractToArray(array, custom_num_of_digits, code_guess);
-
-            for (int i = 0; i <= code_guess_count; i++) {
-                customVectorGuess.push_back(array[i]);
-            }
-
-            customVectorGuess.resize(custom_num_of_digits);
-        }
+        }      
     }
 
     /* num_of_digits is not 0 (random) */
@@ -195,10 +195,9 @@ int main()
         }
         cout << "" << endl;
 
-        randomVector.resize(num_of_digits);
-
-        int code_guess;        
-
+        int code_guess;   
+        
+        // user begins to guess!
         while (true) {
             cout << "Enter Guess: ";
             cin >> code_guess;
@@ -210,35 +209,11 @@ int main()
             else if ( (duplicateCheck(code_guess) == true) || (code_guess_count + 1 < num_of_digits) ) {
                 cout << "Each number must be different! " << endl;
             }
-            else
+            else if (winCondition(randomVector, randomVectorGuess,code_guess,code_guess_count, num_of_digits) == 1) {
                 break;
-        }
-
-        int code_guess_count = digitsCount(code_guess);
-
-        if (code_guess_count == num_of_digits) {
-            int array[10];
-            extractToArray(array, num_of_digits, code_guess);
-
-            for (int i = 0; i < code_guess_count; i++) {
-                randomVectorGuess.push_back(array[i]);
             }
-
-            randomVectorGuess.resize(num_of_digits);
-        }
-        else {
-            int array[10];
-            extractToArray(array, num_of_digits, code_guess);
-
-            for (int i = 0; i <= code_guess_count; i++) {
-                randomVectorGuess.push_back(array[i]);
-            }
-
-            randomVectorGuess.resize(num_of_digits);
         }
     }
-
-
 
     cout << "\nPress any key to exit... " << endl;
     getchar();
