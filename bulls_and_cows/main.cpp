@@ -105,6 +105,7 @@ int main()
                     cout << customVector[i] << " ";
                 }
                 cout << "" << endl;
+
                 customVector.resize(custom_num_of_digits);
                 break;
             }
@@ -124,6 +125,7 @@ int main()
                     cout << customVector[i] << " ";
                 }
                 cout << "" << endl;
+
                 customVector.resize(custom_num_of_digits);
                 break;
             }
@@ -152,8 +154,28 @@ int main()
                 break;
         }
 
-        // TODO: extract guess code to vector and compare it..
         int code_guess_count = digitsCount(code_guess);
+
+        if (code_guess_count == custom_num_of_digits) {
+            int array[10];
+            extractToArray(array, custom_num_of_digits, code_guess);
+
+            for (int i = 0; i < code_guess_count; i++) {
+                customVectorGuess.push_back(array[i]);
+            }
+            
+            customVectorGuess.resize(custom_num_of_digits);
+        }
+        else {
+            int array[10];
+            extractToArray(array, custom_num_of_digits, code_guess);
+
+            for (int i = 0; i <= code_guess_count; i++) {
+                customVectorGuess.push_back(array[i]);
+            }
+
+            customVectorGuess.resize(custom_num_of_digits);
+        }
     }
 
     /* num_of_digits is not 0 (random) */
@@ -166,6 +188,7 @@ int main()
             randomVector.push_back(rd[i]);
         }
 
+        // output the code for testing purpose
         cout << "Number to guess: ";
         for (int i = 0; i < num_of_digits; i++) {
             cout << randomVector[i] << " ";
@@ -191,16 +214,27 @@ int main()
                 break;
         }
 
-        // TODO: extract guess code to vector and compare it..
         int code_guess_count = digitsCount(code_guess);
 
         if (code_guess_count == num_of_digits) {
             int array[10];
             extractToArray(array, num_of_digits, code_guess);
 
-            for (int i = 0; i <= code_guess_count - 1; i++) {
+            for (int i = 0; i < code_guess_count; i++) {
                 randomVectorGuess.push_back(array[i]);
             }
+
+            randomVectorGuess.resize(num_of_digits);
+        }
+        else {
+            int array[10];
+            extractToArray(array, num_of_digits, code_guess);
+
+            for (int i = 0; i <= code_guess_count; i++) {
+                randomVectorGuess.push_back(array[i]);
+            }
+
+            randomVectorGuess.resize(num_of_digits);
         }
     }
 
