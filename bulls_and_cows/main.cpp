@@ -65,14 +65,23 @@ int winCondition(vector<int> vt, vector<int> vtGuess, int code_guess, int counte
         vtGuess.push_back(array[i]);
     }
 
-    // TODO: add Cows
     int bulls = 0;
+    int cows = 0;
+
     for (int i = 0; i < nod; i++) {
         if (vt.at(i) == vtGuess.at(i))
             bulls++;
+        else {
+            for (int j = 0; j < nod; j++) {
+                if (vt.at(i) == vtGuess.at(j)) {
+                    cows++;
+                }
+            }
+        }
     }
-    cout << bulls << " BULLS " << endl;
-    cout << "NUM OF DIGITS " << nod << endl;
+    cout << bulls << " BULLS! " << endl;
+    cout << cows << " COWS! " << endl;
+    cout << "\n";
     if (bulls == nod)
         win = 1;
     return win;
@@ -125,7 +134,7 @@ int main()
                 }
 
                 // output the code for testing purpose
-                cout << "Number to guess: ";
+                cout << "\nNumber to guess: ";
                 for (int i = 0; i <= custom_code_count - 1; i++) {
                     cout << customVector[i] << " ";
                 }
@@ -143,7 +152,7 @@ int main()
                 }
 
                 // output the code for testing purpose
-                cout << "Number to guess: ";
+                cout << "\nNumber to guess: ";
                 for (int i = 0; i <= custom_code_count; i++) {
                     cout << customVector[i] << " ";
                 }
@@ -169,7 +178,7 @@ int main()
                 else
                     cout << "You can only enter " << custom_num_of_digits << " digits" << endl;
             }
-            else if (duplicateCheck(code_guess) == true || (code_guess_count + 1 < custom_num_of_digits)) {
+            else if ( (duplicateCheck(code_guess) == true) || (code_guess_count + 1 < custom_num_of_digits) ) {
                 cout << "Each number must be different! " << endl;
             }
             else if (winCondition(customVector, customVectorGuess, code_guess, code_guess_count, custom_num_of_digits) == 1) {
@@ -189,7 +198,7 @@ int main()
         }
 
         // output the code for testing purpose
-        cout << "Number to guess: ";
+        cout << "\nNumber to guess: ";
         for (int i = 0; i < num_of_digits; i++) {
             cout << randomVector[i] << " ";
         }
@@ -209,13 +218,13 @@ int main()
             else if ( (duplicateCheck(code_guess) == true) || (code_guess_count + 1 < num_of_digits) ) {
                 cout << "Each number must be different! " << endl;
             }
-            else if (winCondition(randomVector, randomVectorGuess,code_guess,code_guess_count, num_of_digits) == 1) {
+            else if (winCondition(randomVector, randomVectorGuess, code_guess,code_guess_count, num_of_digits) == 1) {
                 break;
             }
         }
     }
 
-    cout << "\nPress any key to exit... " << endl;
+    cout << "\nCongratulations, you win!!! Press any key to exit... " << endl;
     getchar();
     getchar();
     return 0;
