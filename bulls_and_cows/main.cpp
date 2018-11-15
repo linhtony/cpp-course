@@ -97,12 +97,16 @@ int winCondition(vector<int> vt, vector<int> vtGuess, int code_guess, int counte
 
 int main() 
 {   
+    // TODO(tue): Please ensure consistency in naming variable, func.
     vector<int> customVector; // num_of_digits = 0
     vector<int> customVectorGuess; // guess vector (num_of_digits = 0)
 
     vector<int> randomVector; // num_of_digits not 0
     vector<int> randomVectorGuess; // guess vector (num_of_digits not 0)
-
+    
+    // TODO(tue): Can you wrap your code in seperated funtionality so that
+    // your code will have nice layout, be clean and easy to read and maintain.
+    // Eg: Create func and located outside main().
     while (true) {
         cout << "Enter number of digits in code: ";
         cin >> num_of_digits;
