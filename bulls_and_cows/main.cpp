@@ -5,10 +5,17 @@
 
 
 using namespace std;
-
+// TODO(tue): Don't use global variable if not really necessary.
 // number of digits.. must be 0, 3, 4 or 5 (0 is the cheat code)
 int num_of_digits;
 
+// TODO(tue):
+// 1. What happens if the set of supported num_of_digits is 10 instead of 4 as current?
+// you still check if condition like current, don't you?
+// What happens if checkNumberOfDigits() is called many times?
+// Better way: initialize a static set of supported number.
+// 2. Why do you need "else" ?
+//
 // check if the user type the number of digits correctly
 bool checkNumberOfDigits() {
     if ( (num_of_digits == 0) || (num_of_digits == 3) || (num_of_digits == 4) || (num_of_digits == 5) ) { 
